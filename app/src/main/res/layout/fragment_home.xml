@@ -28,7 +28,6 @@
                     android:id="@+id/back_main"
                     android:layout_width="match_parent"
                     android:layout_height="700dp"
-
                     android:orientation="vertical">
 
                     <androidx.viewpager2.widget.ViewPager2
@@ -146,7 +145,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:text="Science Fiction Movies"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
@@ -161,14 +159,13 @@
                         <LinearLayout
                             android:id="@+id/interested_layout"
                             android:layout_width="match_parent"
+                            android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:text="Based on your Recent Interest..."
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
@@ -178,7 +175,7 @@
                                 android:id="@+id/home_bywm_list_Recycler_View"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp" />
+                                 />
                         </LinearLayout>
                         <LinearLayout
                             android:id="@+id/trends_in_local"
@@ -190,7 +187,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:text="This Month's Top Eight Movies"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
@@ -200,7 +196,7 @@
                                 android:id="@+id/top_trending_release_recyclerview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp" />
+                               />
                         </LinearLayout>
 
                         <LinearLayout
@@ -209,11 +205,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:text="DC Movies"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
@@ -223,7 +217,7 @@
                                 android:id="@+id/DC_release_recyclerview"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_margin="10dp" />
+                           />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>

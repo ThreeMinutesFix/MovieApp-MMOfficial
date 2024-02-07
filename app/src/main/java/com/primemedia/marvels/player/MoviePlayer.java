@@ -6,6 +6,8 @@ import static com.primemedia.marvels.fragments.Home.setWindowFlag;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.PictureInPictureParams;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,7 @@ import android.graphics.Color;
 import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
@@ -65,6 +68,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.vkay94.dtpv.DoubleTapPlayerView;
 import com.github.vkay94.dtpv.youtube.YouTubeOverlay;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -73,6 +77,7 @@ import com.primemedia.marvels.Constants;
 import com.primemedia.marvels.R;
 import com.primemedia.marvels.dialogs.AudioTrackSelectionDialog;
 import com.primemedia.marvels.dialogs.TrackSelectionDialog;
+import com.primemedia.marvels.resume_content.ResumeContent;
 import com.primemedia.marvels.resume_content.ResumeContentDatabase;
 import com.primemedia.marvels.utility.GospelUtil;
 import com.primemedia.marvels.utility.TinyDB;
@@ -83,6 +88,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -127,7 +135,7 @@ public class MoviePlayer extends AppCompatActivity {
     NumberPicker numberPicker;
     String intro_start;
     String intro_end;
-    Button Skip_Intro_btn;
+    MaterialButton Skip_Intro_btn;
     private boolean vpnStatus;
     private GospelUtil helperUtils;
     Boolean contentLoaded = false;
@@ -139,7 +147,7 @@ public class MoviePlayer extends AppCompatActivity {
     int sourceID;
     int ct;
     LinearLayout textContainer, audiodelay;
-    String name;
+    String Movie_name;
     public static long landpos;
     private Handler handler_position;
     private static final int BRIGHTNESS_STEP = 10;
@@ -193,6 +201,8 @@ public class MoviePlayer extends AppCompatActivity {
         youtube_overlay = findViewById(R.id.ytOverlay);
         sliderContent = findViewById(R.id.slider_content_movies);
         animatedCardView = findViewById(R.id.animatedCardView);
+        Skip_Intro_btn = findViewById(R.id.Skip_Intro_btn);
+        handler1.post(runnable);
         textContainer = findViewById(R.id.textContainer);
         youtube_overlay.performListener(new YouTubeOverlay.PerformListener() {
             @Override
@@ -231,7 +241,7 @@ public class MoviePlayer extends AppCompatActivity {
         tinyDB = new TinyDB(this);
         userAgent = Util.getUserAgent(this, "KAIOS");
         sourceID = intent.getExtras().getInt("SourceID");
-        name = intent.getExtras().getString("name");
+        Movie_name = intent.getExtras().getString("name");
         contentID = intent.getExtras().getInt("contentID");
         source = intent.getExtras().getString("source");
         String url = intent.getExtras().getString("url");
@@ -239,8 +249,11 @@ public class MoviePlayer extends AppCompatActivity {
         DrmUuid = intent.getExtras().getString("DrmUuid");
         DrmLicenseUri = intent.getExtras().getString("DrmLicenseUri");
         cpUrl = url;
+        //ResumePlayback
+        db = ResumeContentDatabase.getDbInstance(this.getApplicationContext());
+        resumePosition = intent.getExtras().getLong("position");
         TextView contentSecondName = findViewById(R.id.contentSecondName);
-        contentSecondName.setText(name);
+        contentSecondName.setText(Movie_name);
         if (intent.getExtras().getString("Content_Type") != null) {
             mContentType = intent.getExtras().getString("Content_Type");
 
@@ -252,23 +265,30 @@ public class MoviePlayer extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest sr = new StringRequest(Request.Method.GET, Constants.url + "getMovieDetails/" + contentID, response -> {
-            Log.d("movienameResponse",response);
-           if(response!=null)
-           {
-               JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
-               contentFirstName.setText(jsonObject.get("name").getAsString());
-               TextView rating_context = findViewById(R.id.rating_context);
-               rating_context.setText(jsonObject.get("context_cert").getAsString());
-           }
-           else
-           {
-               contentFirstName.setText("");
-           }
+            Log.d("movienameResponse", response);
+            JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
+            contentFirstName.setText(jsonObject.get("name").getAsString());
+            TextView rating_context = findViewById(R.id.rating_context);
+            rating_context.setText(jsonObject.get("context_cert").getAsString());
+            Log.d("ratings", jsonObject.get("context_cert").getAsString());
+            int type = jsonObject.get("type").getAsInt();
+            String releaseDate = "";
+            if (!jsonObject.get("release_date").getAsString().equals("")) {
+                releaseDate = jsonObject.get("release_date").getAsString();
+            }
+            db = ResumeContentDatabase.getDbInstance(this.getApplicationContext());
+            if (db.resumeContentDao().getResumeContentid(contentID) == 0) {
+                db.resumeContentDao().insert(new ResumeContent(0, contentID, source, url, jsonObject.get("poster").getAsString(), Movie_name, releaseDate, 0, 0, intent.getExtras().getString("Content_Type"), type));
+                resumeContentID = db.resumeContentDao().getResumeContentid(contentID);
+            } else {
+                resumeContentID = db.resumeContentDao().getResumeContentid(contentID);
+                db.resumeContentDao().updateSource(source, url, type, resumeContentID);
+            }
         }, error -> {
             // Do nothing
         }) {
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
+            public Map<String, String> getHeaders() {
                 Map<String, String> params = new HashMap<>();
                 params.put("x-api-key", Constants.apiKey);
                 return params;
@@ -276,18 +296,22 @@ public class MoviePlayer extends AppCompatActivity {
         };
         queue.add(sr);
 
-        if (savedInstanceState != null) {
-            long playbackPosition = savedInstanceState.getLong("playbackPosition");
-            boolean isPlaying = savedInstanceState.getBoolean("isPlaying");
-            Prepare_Source(source, url, DrmUuid, DrmLicenseUri);
-            if (simpleExoPlayer != null) {
-                simpleExoPlayer.seekTo(playbackPosition);
-                simpleExoPlayer.setPlayWhenReady(isPlaying);
+
+        skip_available = intent.getExtras().getInt("skip_available");
+        intro_start = intent.getExtras().getString("intro_start");
+        intro_end = intent.getExtras().getString("intro_end");
+
+        if (resumePosition == 0) {
+            if (db.resumeContentDao().getResumeContentid(contentID) != 0) {
+                resumePosition = db.resumeContentDao().getResumeContentPosition(contentID);
+                Log.d("Myposition", " " + resumePosition);
+                Prepare_Source(source, url, DrmUuid, DrmLicenseUri);
+            } else {
+                Prepare_Source(source, url, DrmUuid, DrmLicenseUri);
             }
         } else {
             Prepare_Source(source, url, DrmUuid, DrmLicenseUri);
         }
-
 
         startAnimation();
 
@@ -308,23 +332,21 @@ public class MoviePlayer extends AppCompatActivity {
                     trackSelectionDialog.show(fragmentManager, "trackSelectionDialog");
                 }
             } else {
-                Quality_settings.setClickable(false);
+                if (Quality_settings!=null)
+                {
+                    Quality_settings.setClickable(false);
+                }
+
             }
         });
         LinearLayout Audio = playerView.findViewById(R.id.audio_sub);
         Audio.setOnClickListener(v ->
-
         {
-            MappingTrackSelector.MappedTrackInfo mappedTrackInfo;
-            DefaultTrackSelector.Parameters parameters = trackSelector.getParameters();
             AudioTrackSelectionDialog trackSelectionDialog = AudioTrackSelectionDialog.createForPlayer(simpleExoPlayer, dismissedDialog -> {
             });
             trackSelectionDialog.show(getSupportFragmentManager(), null);
         });
-
-
     }
-
 
     private void startAnimation() {
         if (!isAnimationRunning) {
@@ -494,39 +516,30 @@ public class MoviePlayer extends AppCompatActivity {
         };
 
         simpleExoPlayer.addListener(new Player.Listener() {
-            Runnable updateDurationRunnable;
+//            Runnable updateDurationRunnable;
 
             @Override
-            public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+            public void onPlaybackStateChanged(int playbackState) {
+                Player.Listener.super.onPlaybackStateChanged(playbackState);
+                if (playbackState == Player.STATE_READY) {
+                    // Active playback.
+                    contentLoaded = true;
+                    db.resumeContentDao().updateDuration(simpleExoPlayer.getDuration(), resumeContentID);
 
-                switch (playbackState) {
-                    case Player.STATE_READY:
-                        contentLoaded = true;
-                        handler.post(updateDurationRunnable);
-                        if (db != null) {
-                            db.resumeContentDao().updateDuration(simpleExoPlayer.getDuration(), resumeContentID);
+                    Log.d("CurrentPosition", "" + resumePosition);
+                    long currentPosition = simpleExoPlayer.getCurrentPosition();
+                    if (currentPosition >= 0 && currentPosition <= 10000) {
+                        if (!isAnimationRunning || simpleExoPlayer != null) {
+                            startAnimation();
                         }
-                        break;
-                    case Player.STATE_ENDED:
-                        break;
-                    case Player.STATE_IDLE:
-
-                        break;
-                    case Player.STATE_BUFFERING:
-
-
-                }
-                long currentPosition = simpleExoPlayer.getCurrentPosition();
-                if (currentPosition >= 0 && currentPosition <= 10000) {
-                    if (!isAnimationRunning || simpleExoPlayer != null) {
-                        startAnimation();
+                    } else {
+                        sliderContent.setVisibility(View.GONE);
+                        animatedCardView.setVisibility(View.GONE);
+                        isAnimationRunning = false;
                     }
-                } else {
-                    sliderContent.setVisibility(View.GONE);
-                    animatedCardView.setVisibility(View.GONE);
-                    isAnimationRunning = false;
                 }
             }
+
         });
         AtomicInteger subContentID = new AtomicInteger();
         if (resumePosition != 0 && simpleExoPlayer != null) {
@@ -821,6 +834,85 @@ public class MoviePlayer extends AppCompatActivity {
         if (hasFocus) {
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    private Handler handler1 = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (simpleExoPlayer != null) {
+                if (simpleExoPlayer.isPlaying()) {
+                    long apprxDuration = simpleExoPlayer.getDuration() - 5000;
+                    if (simpleExoPlayer.getCurrentPosition() > apprxDuration) {
+                        db.resumeContentDao().delete(resumeContentID);
+                    } else {
+                        db.resumeContentDao().update(simpleExoPlayer.getCurrentPosition(), resumeContentID);
+                    }
+                }
+            }
+
+            //Skip Feature
+            if (skip_available == 1) {
+                if (simpleExoPlayer != null) {
+                    if (intro_start.equals("") || intro_start.equals("0") || intro_start.equals(null) || intro_end.equals("") || intro_end.equals("0") || intro_end.equals(null)) {
+                        Skip_Intro_btn.setVisibility(View.GONE);
+                    } else {
+                        if (Get_mil_From_Time(intro_start) < simpleExoPlayer.getContentPosition() && Get_mil_From_Time(intro_end) > simpleExoPlayer.getContentPosition()) {
+                            Skip_Intro_btn.setVisibility(View.VISIBLE);
+                        } else {
+                            Skip_Intro_btn.setVisibility(View.GONE);
+                        }
+                    }
+                }
+
+            } else {
+                Skip_Intro_btn.setVisibility(View.GONE);
+            }
+
+
+            ////
+
+
+            // Repeat every 1 seconds
+            handler1.postDelayed(runnable, 1000);
+        }
+    };
+
+    long Get_mil_From_Time(String Time) {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:SS");
+        Date parsed_date = null;
+        try {
+            parsed_date = format.parse(Time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat hour = new SimpleDateFormat("HH");
+        SimpleDateFormat min = new SimpleDateFormat("mm");
+        SimpleDateFormat sec = new SimpleDateFormat("SS");
+
+        String Hour = hour.format(parsed_date);
+        String Min = min.format(parsed_date);
+        String Sec = sec.format(parsed_date);
+
+
+        long m_hour = 0;
+        long m_min = 0;
+        long m_sec = 0;
+        if (!Hour.equals("00")) {
+            m_hour = Integer.parseInt(Hour) * 3600000;
+        }
+
+        if (!Min.equals("00")) {
+            m_min = Integer.parseInt(Min) * 60000;
+        }
+
+        if (!Sec.equals("00")) {
+            m_sec = Integer.parseInt(Sec) * 1000;
+        }
+
+        Long F_mil = m_hour + m_min + m_sec;
+
+        return F_mil;
     }
 
 

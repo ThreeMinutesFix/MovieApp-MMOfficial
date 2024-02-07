@@ -72,20 +72,21 @@ public class Home extends Fragment {
     View view;
     ViewPager2 HomeViewpager;
     NestedScrollView nestedScrollView;
-   public static LinearLayout resume_Layout;
+    public static LinearLayout resume_Layout;
     Bitmap bitmap;
     private final Handler sliderHandler = new Handler();
     Context mContext;
     int userID;
     int shuffleContents;
     int movieImageSliderMaxVisible;
-    RecyclerView drama_release_recyclerview,DC_release_recyclerview;
+    RecyclerView drama_release_recyclerview, DC_release_recyclerview;
     RecyclerView recenly_release_recyclerview, superherorecyclerview, top_trending_release_recyclerview, home_bywm_list_Recycler_View, sceince_release_recyclerview;
     String Cat_name = "superhero";
     String Cat_name3 = "DCEU_Timeline_order";
     String Cat_name2 = "Sci-Fi";
 
     String Cat_name6 = "Kids";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -151,7 +152,7 @@ public class Home extends Fragment {
         });
 
         interested_layout = view.findViewById(R.id.interested_layout);
-        DC_release_recyclerview  = view.findViewById(R.id.DC_release_recyclerview);
+        DC_release_recyclerview = view.findViewById(R.id.DC_release_recyclerview);
         superherorecyclerview = view.findViewById(R.id.superherorecyclerview);
         recenly_release_recyclerview = view.findViewById(R.id.recenly_release_recyclerview);
         top_trending_release_recyclerview = view.findViewById(R.id.top_trending_release_recyclerview);
@@ -163,8 +164,52 @@ public class Home extends Fragment {
         home_swoper.setOnRefreshListener(() -> {
             LoadMoviesContent();
             loadSliderHome();
+            loadResumeLayout();
         });
+        loadResumeLayout();
         return view;
+    }
+
+    private void loadResumeLayout() {
+        ResumeContentDatabase db = ResumeContentDatabase.getDbInstance(mContext.getApplicationContext());
+        List<ResumeContent> resumeContents = db.resumeContentDao().getResumeContents();
+
+        if (resumeContents.isEmpty()) {
+            resume_Layout.setVisibility(View.GONE);
+        } else {
+            resume_Layout.setVisibility(View.VISIBLE);
+        }
+
+        List<ResumeContent> mData = resumeContents;
+        List<ContinuePlayingList> continuePlayingList = new ArrayList<>();
+
+        for (int i = 0; i < mData.size(); i++) {
+
+            int id = mData.get(i).getId();
+            int contentID = mData.get(i).getContent_id();
+
+            String contentType = mData.get(i).getContent_type();
+
+            String name = mData.get(i).getName();
+
+            String year = "";
+            if (!mData.get(i).getYear().equals("")) {
+                year = GospelUtil.getYearFromDate(mData.get(i).getYear());
+            }
+            String poster = mData.get(i).getPoster();
+            String sourceType = mData.get(i).getSource_type();
+            String sourceUrl = mData.get(i).getSource_url();
+            int type = mData.get(i).getType();
+            long position = mData.get(i).getPosition();
+            long duration = mData.get(i).getDuration();
+
+            continuePlayingList.add(new ContinuePlayingList(id, contentID, name, year, poster, sourceType, sourceUrl, type, contentType, position, duration));
+
+            ContinuePlayingListAdepter myadepter = new ContinuePlayingListAdepter(mContext, continuePlayingList);
+            continue_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
+            continue_release_recyclerview.setAdapter(myadepter);
+
+        }
     }
 
     @SuppressLint("HardwareIds")
@@ -181,7 +226,7 @@ public class Home extends Fragment {
                     int id = rootObject.get("id").getAsInt();
                     String name = rootObject.get("name").getAsString();
 
-                    String certificate_type =rootObject.get("certificate_type").getAsString();
+                    String certificate_type = rootObject.get("certificate_type").getAsString();
 
                     String year = "";
 
@@ -477,45 +522,6 @@ public class Home extends Fragment {
             }
         };
 
-        ResumeContentDatabase db = ResumeContentDatabase.getDbInstance(mContext.getApplicationContext());
-        List<ResumeContent> resumeContents = db.resumeContentDao().getResumeContents();
-
-        if (resumeContents.isEmpty()) {
-            resume_Layout.setVisibility(View.GONE);
-        } else {
-            resume_Layout.setVisibility(View.VISIBLE);
-        }
-
-        List<ResumeContent> mData = resumeContents;
-        List<ContinuePlayingList> continuePlayingList = new ArrayList<>();
-
-        for (int i = 0; i < mData.size(); i++) {
-
-            int id = mData.get(i).getId();
-            int contentID = mData.get(i).getContent_id();
-
-            String contentType = mData.get(i).getContent_type();
-
-            String name = mData.get(i).getName();
-
-            String year = "";
-            if (!mData.get(i).getYear().equals("")) {
-                year = GospelUtil.getYearFromDate(mData.get(i).getYear());
-            }
-            String poster = mData.get(i).getPoster();
-            String sourceType = mData.get(i).getSource_type();
-            String sourceUrl = mData.get(i).getSource_url();
-            int type = mData.get(i).getType();
-            long position = mData.get(i).getPosition();
-            long duration = mData.get(i).getDuration();
-
-            continuePlayingList.add(new ContinuePlayingList(id, contentID, name, year, poster, sourceType, sourceUrl, type, contentType, position, duration));
-
-            ContinuePlayingListAdepter myadepter = new ContinuePlayingListAdepter(mContext, continuePlayingList);
-            continue_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
-            continue_release_recyclerview.setAdapter(myadepter);
-
-        }
 
     }
 
