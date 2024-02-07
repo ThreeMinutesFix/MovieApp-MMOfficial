@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "152974754132",
+    "project_id": "moviemarv-af428",
+    "storage_bucket": "moviemarv-af428.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152974754132:android:2da536205995886359c8c1",
+        "android_client_info": {
+          "package_name": "com.primemedia.marvels"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDid8vM88Z1T7U22n60MCrFeCyiX5YEKEM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

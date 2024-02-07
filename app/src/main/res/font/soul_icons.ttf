@@ -1,0 +1,329 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Online decompiler for Java, Android, Python and C#.">
+        <meta name="author" content="">
+        
+            
+        
+        <link rel="icon" href="/favicon.ico">
+
+        <title>in-startv-hotstar1702270800.apk/soul_icons.ttf - Decompiler.com</title>
+
+        <link rel="stylesheet" media="screen" href="/assets/stylesheets/main.css">
+        <link rel="stylesheet" media="screen" href="/assets/stylesheets/dropzone.css">
+        <script src="/assets/javascripts/prebid-ads.js" type="text/javascript"></script>
+
+
+
+
+            <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" media="screen" href="/assets/stylesheets/bootstrap.min.css">
+
+            <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+            <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
+
+            <!-- Custom styles for this template -->
+            <!--<link href="navbar-static-top.css" rel="stylesheet">-->
+
+            <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+            <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+            <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- <script data-cfasync="false" async src="https://s.nitropay.com/ads-1502.js" data-log-level="silent"></script> -->
+    <script src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script>
+    <script>
+      ethicalads.wait.then((placements) => {
+          if (!placements.length) {
+
+              var head = document.getElementsByTagName('head')[0];
+
+              var script = document.createElement('script');
+              script.src = "https://s.nitropay.com/ads-1502.js";
+              script.type = 'text/javascript';
+
+              head.appendChild(script);
+
+              div = document.querySelector('[data-ea-publisher]')
+              div.innerHTML = '<div id="dec-now"></div>'
+              window.nitroAds=window.nitroAds||{createAd:function(){return new Promise(e=>{window.nitroAds.queue.push(["createAd",arguments,e])})},addUserToken:function(){window.nitroAds.queue.push(["addUserToken",arguments])},queue:[]};
+              window['nitroAds'].createAd('dec-now',{"refreshLimit": 20, "refreshTime": 60, "renderVisibleOnly": false, "refreshVisibleOnly": true, "sizes": [ [ "728", "90" ]], "report":{"enabled": true, "icon": true, "wording": "Report Ad", "position": "top-right"}});
+          }
+      });
+  </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9WWCS2LLPE"></script>
+    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-256040966-2');
+            gtag('config', 'G-9WWCS2LLPE');
+    </script>
+    </head>
+
+    <body>
+        <!--BEGIN: Microsoft Advertising UET Javascript tag.-->
+        <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"17524276"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>
+        <!--END: Microsoft Advertising UET Javascript tag-->
+            <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(51671771, "init", {
+       id:51671771,
+       clickmap:true,
+       trackLinks:true,
+       accurateTrackBounce:true,
+       webvisor:true
+   });
+</script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/51671771" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <!-- /Yandex.Metrika counter -->
+        
+    
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/"><span style="color: red">De</span><span style="color: black">compiler<span>.</span>com</span></a>
+        </div>
+        <div id="navbar">
+            <ul class="nav navbar-nav navbar-left">
+                <li ><a href="/jar-string-editor">JAR String Editor</a></li>
+            </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li ><a href="/release-notes">Release Notes</a></li>
+                <li><a href="mailto:support@decompiler.com?subject=Bug%20report%2C%20feature%20request%2C%20suggestion.">support@decompiler.com</a> </li>
+            </ul>
+        </div>
+            <!--
+            //TODO
+        <div id="navbar" class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Your uploads <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">i-Text2.jar</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../navbar/">Default</a></li>
+                <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
+                <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>
+        </div>--><!--/.nav-collapse -->
+    </div>
+</nav>
+
+    
+	<div class="container" style="min-height: 105px">
+	<div data-ea-publisher="decompilercom" data-ea-type="text" id="banner"></div>
+</div>
+
+
+    <div class="container">
+
+    
+
+	<div id="ongoing-decompilation-container">
+		<div id="ongoing-decompilation" class="alert alert-info">
+			Decompilation of your artifact takes longer than usual.
+			<br>
+			You may start observing already decompiled files, while others are still being decompiled.
+			<br>
+			This message will disappear when decompilation is fully completed.
+		</div>
+	</div>
+	<script type="text/javascript" >
+			var decompilationDone = false;
+
+			var decompilationIntervalId = setInterval(function() { if(!decompilationDone) {checkDone();} }, 10000);
+
+			function checkDone(){
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '/done/74b7b17e79cb4af7912a92d9bb2ebac2');
+				xhr.onload = function() {
+					if (xhr.response === '1') {
+						decompilationDone = true;
+						document.getElementById("ongoing-decompilation-container").innerHTML = "<div id=\"successful-decompilation\" class=\"alert alert-success\">Decompilation has been fully completed. All decompiled files are now available.</div>";
+						document.getElementById("download_zip_button").classList.remove('disabled');
+						document.getElementById("download_zip_button").removeAttribute('disabled');
+						if(document.getElementById("delete_artifact_button")) {
+							document.getElementById("delete_artifact_button").classList.remove('disabled');
+							document.getElementById("delete_artifact_button").removeAttribute('disabled');
+						}
+						clearInterval(decompilationIntervalId);
+					}
+				};
+				xhr.send();
+			}
+	</script>
+
+
+<h2 style="display: inline">in-startv-hotstar1702270800.apk</h2>
+
+
+	<form onsubmit="return confirm('Your decompiled artifact will be deleted!');" method="post" id="delete_artifact_form" style="display: inline" action="/delete/74b7b17e79cb4af7912a92d9bb2ebac2">
+		<input type="hidden" name="csrfToken" value="23030e955b62788ced854f1f82eb0dd9673fa2a4-1702523524523-89d89665031555dcf33b88d0"/>
+		
+			<input id="delete_artifact_button" type="submit" class="btn btn-primary disabled" value="Delete" disabled="disabled">
+		
+	</form>
+
+
+	<form method="post" id="download_zip_form" style="display: inline" action="/zip/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk">
+		<input type="hidden" name="csrfToken" value="23030e955b62788ced854f1f82eb0dd9673fa2a4-1702523524523-89d89665031555dcf33b88d0"/>
+		<input type="hidden" name="download_token_value_name" id="download_token_value_id"/>
+		
+			<input id="download_zip_button" type="submit" class="btn btn-primary disabled" value="Download ZIP" disabled="disabled">
+		
+	</form>
+
+
+<script type="text/javascript" >
+
+		if(document.getElementById("download_zip_button")) {
+			var zippingDone = document.getElementById("download_zip_button").getAttribute('value') == "Download ZIP";
+
+			var zippingIntervalId;
+
+			if(!zippingDone) {
+				zippingIntervalId = setInterval(function() { if(!zippingDone) {checkZippingDone();} }, 10000);
+			}
+
+			function checkZippingDone(){
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', '/zippingDone/74b7b17e79cb4af7912a92d9bb2ebac2');
+				xhr.onload = function() {
+					if (xhr.response === '1') {
+						zippingDone = true;
+						if(document.getElementById("download_zip_button")) {
+							document.getElementById("download_zip_button").classList.remove('disabled');
+							document.getElementById("download_zip_button").removeAttribute('disabled');
+							document.getElementById("download_zip_button").setAttribute('value', 'Download ZIP');
+						}
+						if(document.getElementById("delete_artifact_button")) {
+							document.getElementById("delete_artifact_button").classList.remove('disabled');
+							document.getElementById("delete_artifact_button").removeAttribute('disabled');
+						}
+						clearInterval(zippingIntervalId);
+					}
+				};
+				xhr.send();
+			}
+		}
+
+		function getCookie(cname) {
+			var name = cname + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for(var i = 0; i <ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		};
+
+		if(document.getElementById("download_zip_form")) {
+			document.getElementById("download_zip_form").addEventListener('submit', (event) => {
+				var downloadToken = new Date().getTime().toString();
+				document.getElementById("download_token_value_id").setAttribute('value', downloadToken);
+				if(document.getElementById("download_zip_button")) {
+					document.getElementById("download_zip_button").classList.add('disabled');
+					document.getElementById("download_zip_button").setAttribute('disabled','disabled');
+					document.getElementById("download_zip_button").setAttribute('value', 'zipping...');
+				}
+				if(document.getElementById("delete_artifact_button")) {
+					document.getElementById("delete_artifact_button").classList.add('disabled');
+					document.getElementById("delete_artifact_button").setAttribute('disabled','disabled');
+				}
+				var downloadIntervalId = setInterval(function() {
+
+					if(downloadToken == getCookie(downloadToken)) {
+						if(document.getElementById("download_zip_button")) {
+							document.getElementById("download_zip_button").classList.remove('disabled');
+							document.getElementById("download_zip_button").removeAttribute('disabled');
+							document.getElementById("download_zip_button").setAttribute('value', 'Download ZIP');
+						}
+						if(document.getElementById("delete_artifact_button")) {
+							document.getElementById("delete_artifact_button").classList.remove('disabled');
+							document.getElementById("delete_artifact_button").removeAttribute('disabled');
+						}
+						clearInterval(downloadIntervalId);
+					}
+
+				}, 1000);
+			});
+		}
+</script>
+
+
+<ul class="breadcrumb">
+    
+        <li><a href="https://www.decompiler.com/jar/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk">in-startv-hotstar1702270800.apk</a></li>
+    
+        <li><a href="https://www.decompiler.com/jar/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources">resources</a></li>
+    
+        <li><a href="https://www.decompiler.com/jar/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources/res">res</a></li>
+    
+        <li><a href="https://www.decompiler.com/jar/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources/res/font">font</a></li>
+    
+        <li><a href="https://www.decompiler.com/jar/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources/res/font/soul_icons.ttf">soul_icons.ttf</a></li>
+    
+</ul>
+
+    <a href="/download/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources/res/font/soul_icons.ttf">Download file</a>
+
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <pre class="prettyprint">
+    File can not be displayed. Use the link to download it.
+    </pre>
+
+    <a href="/download/74b7b17e79cb4af7912a92d9bb2ebac2/in-startv-hotstar1702270800.apk/resources/res/font/soul_icons.ttf">Download file</a>
+
+    </div> <!-- /container -->
+
+    
+        <iframe src="https://s.click.aliexpress.com/e/_dYsWM8p" style="width:0;height:0;border:0; border:none;" />
+        
+        
+    
+
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <!--<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>-->
+        <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+
+    </body>
+</html>

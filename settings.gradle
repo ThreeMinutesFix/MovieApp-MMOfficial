@@ -1,0 +1,5 @@
+
+rootProject.name = "PrimeMarvels"
+include ':app'
+include ':youtubeExtractor'
+include ':doubletapplayerview'

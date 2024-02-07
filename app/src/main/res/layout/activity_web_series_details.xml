@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/series_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context=".WebSeriesDetails"
+    tools:ignore="UnusedAttribute">
+
+    <include
+        android:id="@+id/cast_addtional"
+        layout="@layout/cast_more"
+        android:visibility="gone" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        app:titleTextColor="@color/text_primary" />
+
+
+    <include
+        android:id="@+id/loader"
+        layout="@layout/item_loader"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/thumbnail"
+        layout="@layout/item_thumbnail_container" />
+
+    <androidx.media3.ui.PlayerView
+        android:id="@+id/youtube_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="0dp">
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/header_media_details" />
+
+
+            <LinearLayout
+                android:id="@+id/tab_content_loader"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                android:gravity="center_horizontal"
+                android:paddingTop="32dp"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/lineAboveTabs"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#2F2F2F" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/containers_series_Tab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black"
+                    android:theme="@style/TabLayoutTheme"
+                    android:visibility="visible"
+
+                    app:tabIndicatorColor="#F51F11"
+                    app:tabIndicatorFullWidth="true"
+                    app:tabIndicatorGravity="top"
+                    app:tabIndicatorHeight="4dp"
+                    android:scrollIndicators="top"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="#E4E4E4"
+                    app:tabTextAppearance="@style/TabText"
+                    app:tabTextColor="@color/text_secondary" />
+
+                <FrameLayout
+                    android:id="@+id/containers_series"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

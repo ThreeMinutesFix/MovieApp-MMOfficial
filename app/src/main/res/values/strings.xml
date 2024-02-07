@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">M-Movies</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="watch_everywhere">Watch Everywhere</string>
+    <string name="stream_your_favorite_contents_on_tv_n_laptop_and_more">Stream your favorite contents on TV, \n laptop and more.</string>
+    <string name="trailers_more"><![CDATA[Trailers & More]]></string>
+    <string name="new_hot"><![CDATA[New & Hot]]></string>
+    <string name="my_marvel">My Marvel</string>
+    <string name="home">Home</string>
+    <string name="dc_sony">WB</string>
+    <string name="only_on_prime_movies">Only on prime Movies</string>
+    <string name="load">loadings\n</string>
+    <string name="rated_pg_13">Rated PG-13</string>
+    <string name="audio_amp_subtitle"><![CDATA[Audio & Subtitle]]></string>
+    <string name="track_selection_title">Select Tracks</string>
+    <string name="playing_now">Playing Now...</string>
+    <string name="save_close"><![CDATA[Save & Close]]></string>
+</resources>

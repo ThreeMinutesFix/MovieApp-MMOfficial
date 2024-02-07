@@ -1,0 +1,21 @@
+<!-- res/drawable/circle_drawable.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background circle -->
+    <item>
+        <shape
+            android:shape="oval">
+            <solid android:color="#2F000000" />
+        </shape>
+    </item>
+
+    <item
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp"
+        android:bottom="2dp">
+        <shape
+            android:shape="oval">
+            <solid android:color="#59000000" />
+        </shape>
+    </item>
+</layer-list>
