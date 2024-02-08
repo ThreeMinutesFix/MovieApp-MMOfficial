@@ -47,6 +47,7 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:paddingBottom="70dp">
+
                         <LinearLayout
                             android:id="@+id/resume_Layout"
                             android:layout_width="match_parent"
@@ -68,6 +69,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="0dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -156,13 +158,15 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/interested_layout"
                             android:layout_width="match_parent"
-                            android:visibility="gone"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -174,9 +178,9 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/home_bywm_list_Recycler_View"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                 />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:id="@+id/trends_in_local"
                             android:layout_width="match_parent"
@@ -195,8 +199,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/top_trending_release_recyclerview"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                               />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -205,6 +208,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -216,8 +220,7 @@
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/DC_release_recyclerview"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                           />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -227,8 +230,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:layout_width="match_parent"
@@ -256,6 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginEnd="20dp">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -264,21 +268,56 @@
             </LinearLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_margin="10dp"
-          android:visibility="gone"
-          android:id="@+id/TabLayouts_Container"
-          android:layout_height="wrap_content">
-          <include
-              android:id="@+id/tablayouts"
 
-              layout="@layout/hometabcustom"
-              />
-      </LinearLayout>
+        <LinearLayout
+            android:id="@+id/TabLayouts_Container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:visibility="gone">
+
+            <include
+                android:id="@+id/tablayouts"
+
+                layout="@layout/hometabcustom" />
+        </LinearLayout>
     </LinearLayout>
-    <include layout="@layout/shimmer_home"
-        android:visibility="gone"
-        android:id="@+id/Movies_Shimmer_Layout"/>
 
+    <include
+        android:id="@+id/Movies_Shimmer_Layout"
+        layout="@layout/shimmer_home"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="60dp"
+        android:clickable="false"
+        android:focusable="false"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/tabcustom"
+            layout="@layout/tabviewcustom" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/genre_initlizer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/categories_main"
+            layout="@layout/categoriesmain" />
+    </LinearLayout>
 </FrameLayout>

@@ -1,6 +1,6 @@
 package com.primemedia.marvels.fragments;
 
-import static com.primemedia.marvels.Dashboard.genre_initlizer;
+import static com.primemedia.marvels.fragments.Home.genre_initlizer;
 import static com.primemedia.marvels.fragments.Home.setWindowFlag;
 
 import android.animation.Animator;
@@ -24,7 +24,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.primemedia.marvels.Dashboard;
 import com.primemedia.marvels.R;
 import com.primemedia.marvels.adapter.AllGenreListAdepter;
 
@@ -41,26 +40,27 @@ public class CategoriesContents extends Fragment {
     private int selectedPosition = RecyclerView.NO_POSITION;
     public RecyclerView genreRecyclerview;
     FragmentManager fragmentManager;
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setStatusBar();
         view = inflater.inflate(R.layout.fragment_catories_contents, container, false);
-        Dashboard dashboard = (Dashboard) requireActivity();
-        View moreItemsTextView = dashboard.genre_initlizer();
-        View tabCustom = dashboard.tabcustom();
-
-        moreItemsTextView.setVisibility(View.GONE);
-        tabCustom.setVisibility(View.GONE);
-        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(genre_initlizer, "alpha", 1f, 0f);
-        fadeOut.setDuration(500);
-        fadeOut.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                genre_initlizer.setVisibility(View.GONE);
-            }
-        });
-        fadeOut.start();
+//        Home dashboard = new Home();
+//        View moreItemsTextView = dashboard.genre_initlizer();
+//        View tabCustom = dashboard.tabcustom();
+//
+//        moreItemsTextView.setVisibility(View.GONE);
+//        tabCustom.setVisibility(View.GONE);
+//        ObjectAnimator fadeOut = ObjectAnimator.ofFloat(genre_initlizer, "alpha", 1f, 0f);
+//        fadeOut.setDuration(500);
+//        fadeOut.addListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                genre_initlizer.setVisibility(View.GONE);
+//            }
+//        });
+//        fadeOut.start();
 
         requireActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 

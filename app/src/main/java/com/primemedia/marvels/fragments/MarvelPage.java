@@ -1,6 +1,6 @@
 package com.primemedia.marvels.fragments;
 
-import static com.primemedia.marvels.fragments.Home.setWindowFlag;
+import static com.primemedia.marvels.Dashboard.bottomBar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,11 +48,11 @@ import java.util.Map;
 public class MarvelPage extends Fragment {
 
     View view;
-    //https://eroticmv.com/the-cousin-1974/
-    LinearLayout Marv_layout, POne, Phase_Two_layout, phase_3_layout, phase_4_layout, phase_5_layout, phase6_layout, live_webseries_more_layoyt, spi_layout, legacyMovies_layout, aven_verse,ironverse_layout,animation_legacy;
+
+    LinearLayout Marv_layout, POne, Phase_Two_layout, phase_3_layout, phase_4_layout, phase_5_layout, phase6_layout, live_webseries_more_layoyt, spi_layout, legacyMovies_layout, aven_verse, ironverse_layout, animation_legacy;
     ImageView more_multi, phase_1, more_P2, phase_3, phase_4, phase_5, live_webseries_more;
-    RecyclerView marvelVerse_recyclerview, Phase5_recyclerview, Phase6_recyclerview, IronmanVerse_recyclerview,spiderVerse_recyclerview, Movieslegacy_recyclerview, Avengers_Recyclerview,
-            Phase1_recyclerview, phase2_recyclerview, phase3_recyclerview, Phase4_recyclerview, Univ_timeline_recyclerview, series_live_recyclerview,Marvel_animation_recyclerview;
+    RecyclerView marvelVerse_recyclerview, Phase5_recyclerview, Phase6_recyclerview, IronmanVerse_recyclerview, spiderVerse_recyclerview, Movieslegacy_recyclerview, Avengers_Recyclerview,
+            Phase1_recyclerview, phase2_recyclerview, phase3_recyclerview, Phase4_recyclerview, Univ_timeline_recyclerview, series_live_recyclerview, Marvel_animation_recyclerview;
     String Marvel_Cinematic_Multiverse = "Marvel_Cinematic_Multiverse";
     String Marvel_Phase_one = "Marvel_Phase_one";
     String Marvel_phase_two = "Marvel_phase_two";
@@ -57,7 +60,9 @@ public class MarvelPage extends Fragment {
     String marvel_phase_four = "marvel_phase_four";
     String Marvel_phase_five = "Marvel_phase_five";
 
+    FragmentManager fragmentManager;
 
+    FragmentTransaction fragmentTransaction;
     String Marvel_phase_six = "Marvel_phase_six";
     String MCU_Timelineorder = "MCU_Timelineorder";
     String SpiderVerse = "SpiderVerse";
@@ -111,8 +116,34 @@ public class MarvelPage extends Fragment {
         animation_legacy = view.findViewById(R.id.animation_legacy);
         series_live_recyclerview = view.findViewById(R.id.series_live_recyclerview);
         AssembleMarvelFilms();
+        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+            @Override
+            public void handleOnBackPressed() {
+                // Handle back press event here
+                // For example, navigate to the previous fragment
+                navigateToPreviousFragment();
+            }
+        };
+
+        // Add the callback to the activity's OnBackPressedDispatcher
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), callback);
+
+
         return view;
     }
+
+    private void navigateToPreviousFragment() {
+
+        fragmentManager = requireActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Home homeFragment = new Home();
+        fragmentTransaction.replace(R.id.contaner, homeFragment);
+        fragmentTransaction.commit();
+        bottomBar.setActiveItem(0);
+        bottomBar.setBadge(0);
+        bottomBar.setSelected(true);
+    }
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -123,8 +154,8 @@ public class MarvelPage extends Fragment {
         }
         win.setAttributes(winParams);
     }
-    private void setStatusBar()
-    {
+
+    private void setStatusBar() {
         Window window = requireActivity().getWindow();
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -138,8 +169,7 @@ public class MarvelPage extends Fragment {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void AssembleMarvelFilms()
-    {
+    private void AssembleMarvelFilms() {
         RequestQueue queue = Volley.newRequestQueue(mContext);
         StringRequest sr1 = new StringRequest(Request.Method.GET, Constants.url + "getContentsReletedToGenre/" + Marvel_Cinematic_Multiverse, response -> {
             if (!response.equals("No Data Avaliable")) {
@@ -185,7 +215,7 @@ public class MarvelPage extends Fragment {
         };
         queue.add(sr1);
         StringRequest sr2 = new StringRequest(Request.Method.GET, Constants.url + "getContentsReletedToGenre/" + Marvel_Phase_one, response -> {
-            Log.d("phase",response);
+            Log.d("phase", response);
             if (!response.equals("No Data Avaliable")) {
                 JsonArray jsonArray = new Gson().fromJson(response, JsonArray.class);
                 List<SearchList> searchList = new ArrayList<>();
@@ -275,7 +305,7 @@ public class MarvelPage extends Fragment {
         };
         queue.add(sr3);
         StringRequest sr4 = new StringRequest(Request.Method.GET, Constants.url + "getContentsReletedToGenre/" + Marvel_phase_three, response -> {
-            Log.d("Data_phase3",response);
+            Log.d("Data_phase3", response);
             if (!response.equals("No Data Avaliable")) {
                 JsonArray jsonArray = new Gson().fromJson(response, JsonArray.class);
                 List<SearchList> searchList = new ArrayList<>();

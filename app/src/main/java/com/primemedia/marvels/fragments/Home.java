@@ -1,5 +1,8 @@
 package com.primemedia.marvels.fragments;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -15,10 +18,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -34,8 +40,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.primemedia.marvels.Constants;
-import com.primemedia.marvels.Dashboard;
 import com.primemedia.marvels.R;
+import com.primemedia.marvels.adapter.AllGenreListAdepter;
 import com.primemedia.marvels.adapter.ContinuePlayingListAdepter;
 import com.primemedia.marvels.adapter.ImageSliderAdepter;
 import com.primemedia.marvels.adapter.MovieListAdepter;
@@ -43,6 +49,7 @@ import com.primemedia.marvels.adapter.SearchListAdepter;
 import com.primemedia.marvels.adapter.TrendingListAdepter;
 import com.primemedia.marvels.adapter.moviesOnlyForYouListAdepter;
 import com.primemedia.marvels.list.ContinuePlayingList;
+import com.primemedia.marvels.list.GenreList;
 import com.primemedia.marvels.list.ImageSliderItem;
 import com.primemedia.marvels.list.MovieList;
 import com.primemedia.marvels.list.SearchList;
@@ -63,6 +70,9 @@ import java.util.Map;
 
 
 public class Home extends Fragment {
+    View tabcustom;
+    public RecyclerView categories;
+    LinearLayout closebtn;
     String imageSliderType;
     LinearLayout interested_layout;
     View moviesShimmerLayout;
@@ -72,20 +82,23 @@ public class Home extends Fragment {
     View view;
     ViewPager2 HomeViewpager;
     NestedScrollView nestedScrollView;
+    FragmentTransaction fragmentTransaction;
     public static LinearLayout resume_Layout;
     Bitmap bitmap;
     private final Handler sliderHandler = new Handler();
     Context mContext;
     int userID;
     int shuffleContents;
+    FragmentManager fragmentManager;
     int movieImageSliderMaxVisible;
     RecyclerView drama_release_recyclerview, DC_release_recyclerview;
     RecyclerView recenly_release_recyclerview, superherorecyclerview, top_trending_release_recyclerview, home_bywm_list_Recycler_View, sceince_release_recyclerview;
     String Cat_name = "superhero";
     String Cat_name3 = "DCEU_Timeline_order";
     String Cat_name2 = "Sci-Fi";
-
+    public static View genre_initlizer;
     String Cat_name6 = "Kids";
+    TextView movies, warner, more_items, paramount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,7 +113,12 @@ public class Home extends Fragment {
         moviesShimmerLayout = view.findViewById(R.id.Movies_Shimmer_Layout);
         continue_release_recyclerview = view.findViewById(R.id.continue_release_recyclerview);
         resume_Layout = view.findViewById(R.id.resume_Layout);
+        tabcustom = view.findViewById(R.id.tabcustom);
+        movies = tabcustom.findViewById(R.id.movies);
+        warner = tabcustom.findViewById(R.id.warner);
 
+        paramount = tabcustom.findViewById(R.id.paramount);
+        more_items = tabcustom.findViewById(R.id.more_items);
         try {
             JSONObject userObject = UserManager.loadUser(mContext);
             userID = userObject.getInt("ID");
@@ -167,7 +185,67 @@ public class Home extends Fragment {
             loadResumeLayout();
         });
         loadResumeLayout();
+        movies.setOnClickListener(v ->
+        {
+            fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction newTransaction = fragmentManager.beginTransaction();
+            OpenMoviesFrag(newTransaction);
+        });
+        paramount.setOnClickListener(v ->
+        {
+            fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction newTransaction = fragmentManager.beginTransaction();
+            ParaFragment(newTransaction);
+        });
+        warner.setOnClickListener(v ->
+        {
+            fragmentManager = requireActivity().getSupportFragmentManager();
+            FragmentTransaction newTransaction = fragmentManager.beginTransaction();
+            WarnerFragment(newTransaction);
+        });
+        genre_initlizer = view.findViewById(R.id.genre_initlizer);
+
+        more_items.setOnClickListener(v ->
+        {
+            LoadGenre();
+        });
+        genre_initlizer = view.findViewById(R.id.genre_initlizer);
+
+        more_items.setOnClickListener(v ->
+        {
+            LoadGenre();
+        });
+        closebtn = genre_initlizer.findViewById(R.id.closebtn);
+        closebtn.setOnClickListener(v ->
+        {
+            ObjectAnimator fadeOut = ObjectAnimator.ofFloat(genre_initlizer, "alpha", 1f, 0f);
+            fadeOut.setDuration(500); // Adjust the duration as needed
+            fadeOut.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    genre_initlizer.setVisibility(View.GONE);
+                }
+            });
+            fadeOut.start();
+        });
         return view;
+    }
+    private void ParaFragment(FragmentTransaction newTransaction) {
+        ParaVeresal paraVersePages = new ParaVeresal();
+        newTransaction.replace(R.id.contaner, paraVersePages);
+        newTransaction.commit();
+    }
+
+    private void WarnerFragment(FragmentTransaction newTransaction) {
+        Warner warnerPages = new Warner();
+        newTransaction.replace(R.id.contaner, warnerPages);
+        newTransaction.commit();
+    }
+
+    private void OpenMoviesFrag(FragmentTransaction newTransaction) {
+        MarvelPage marvelPage = new MarvelPage();
+        newTransaction.replace(R.id.contaner, marvelPage);
+        newTransaction.commit();
     }
 
     private void loadResumeLayout() {
@@ -621,4 +699,88 @@ public class Home extends Fragment {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
+    private void LoadGenre() {
+
+        categories = genre_initlizer.findViewById(R.id.categories);
+        List<GenreList> genreList = new ArrayList<>();
+        RequestQueue queue = Volley.newRequestQueue(mContext);
+        StringRequest sr = new StringRequest(Request.Method.GET, Constants.url + "getGenreList", response -> {
+            if (!response.equals("No Data Avaliable")) {
+                ObjectAnimator fadeIn = ObjectAnimator.ofFloat(genre_initlizer, "alpha", 0f, 1f);
+                fadeIn.setDuration(500);
+                fadeIn.addListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        genre_initlizer.setVisibility(View.VISIBLE);
+                    }
+                });
+                fadeIn.start();
+                JsonArray jsonArray = new Gson().fromJson(response, JsonArray.class);
+                for (JsonElement r : jsonArray) {
+                    JsonObject rootObject = r.getAsJsonObject();
+                    int id = rootObject.get("id").getAsInt();
+                    String name = rootObject.get("name").getAsString();
+                    String icon = rootObject.get("icon").getAsString();
+                    String description = rootObject.get("description").getAsString();
+                    int featured = rootObject.get("featured").getAsInt();
+                    int status = rootObject.get("status").getAsInt();
+
+                    if (status == 1) {
+                        if (name.contains("_")) {
+
+                            name = name.replaceAll("_", " ");
+                            name = capitalizeEachWord(name);
+                        } else {
+                            // Capitalize the first letter of each word
+                            name = capitalizeFirstLetter(name);
+                        }
+                        genreList.add(new GenreList(id, name, icon, description, featured, status));
+                    }
+                }
+                AllGenreListAdepter myadepter = new AllGenreListAdepter(mContext, genreList);
+
+                categories.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.VERTICAL, false));
+                categories.setAdapter(myadepter);
+            } else {
+
+                genre_initlizer.setVisibility(View.GONE);
+            }
+
+        }, error -> {
+
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("x-api-key", Constants.apiKey);
+                return params;
+            }
+        };
+        queue.add(sr);
+
+    }
+
+    private String capitalizeFirstLetter(String str) {
+        if (str != null && !str.isEmpty()) {
+            return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+        } else {
+            return "";
+        }
+    }
+
+    private String capitalizeEachWord(String str) {
+        StringBuilder result = new StringBuilder(str.length());
+        String[] words = str.split("\\s");
+        for (String word : words) {
+            result.append(capitalizeFirstLetter(word)).append(" ");
+        }
+        return result.toString().trim();
+    }
+    public View genre_initlizer() {
+        return genre_initlizer;
+    }
+
+    public View tabcustom() {
+        return tabcustom;
+    }
 }

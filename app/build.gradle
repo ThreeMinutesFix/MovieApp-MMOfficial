@@ -129,7 +129,6 @@ dependencies {
     implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation "com.stringcare:library:${versions.stringcare_version}"
-    implementation 'com.github.ibrahimsn98:NiceBottomBar:2.2'
     //Room
     implementation "androidx.room:room-runtime:2.4.2"
     annotationProcessor "androidx.room:room-compiler:2.4.2"
@@ -149,4 +148,5 @@ dependencies {
     implementation project(':doubletapplayerview')
     implementation "com.github.anilbeesetti.nextlib:nextlib-media3ext:0.6.0" // To add media3 software decoders and extensions
     implementation "com.github.anilbeesetti.nextlib:nextlib-mediainfo:0.6.0" // To get media info through ffmpeg
+
 }
