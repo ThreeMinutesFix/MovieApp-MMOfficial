@@ -36,8 +36,8 @@ public class Warner extends Fragment {
     View view;
     String New_DCU = "New_DCU";
     String DCEU_Timeline_order = "DCEU_Timeline_order";
-    String batman_movies = "batman_movies";
-    String superman_movies = "superman_movies";
+    String batman_movies = "Batman";
+    String superman_movies = "Superman";
     RecyclerView dc_movies, dc_movies_extended,superman_movies_recyclerview,batman_movies_recyclerview;
     Context mContext;
     @Override
