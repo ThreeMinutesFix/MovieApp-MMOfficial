@@ -62,7 +62,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:6.1.0"
 
     //Firebase Auth
-    implementation 'com.google.firebase:firebase-auth:22.3.0'
+    implementation 'com.google.firebase:firebase-auth:22.3.1'
     implementation 'com.google.android.gms:play-services-auth:20.7.0'
     implementation 'com.google.firebase:firebase-core:21.1.1'
     //StartApp
@@ -100,18 +100,28 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     //Facebook Ad Network
+    //noinspection GradleDependency
     implementation 'androidx.annotation:annotation:1.7.0'
 
 
     //Toasty
     implementation 'com.github.GrenderG:Toasty:1.5.2'
+    //noinspection GradleDependency
     implementation 'androidx.lifecycle:lifecycle-process:2.5.1'
+    //noinspection GradleDependency
     implementation 'androidx.core:core-ktx:1.10.1'
+    //noinspection GradleDependency
     implementation 'androidx.work:work-runtime:2.7.1'
     implementation "androidx.multidex:multidex:2.0.1"
+    //noinspection GradleDependency
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+    //noinspection GradleDependency
     implementation "androidx.lifecycle:lifecycle-runtime:2.3.1"
+    //noinspection GradleDependency
+
+    //noinspection LifecycleAnnotationProcessorWithJava8
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.3.1"
+
     implementation 'com.facebook.infer.annotation:infer-annotation:0.18.0'
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.2'
@@ -130,7 +140,9 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation "com.stringcare:library:${versions.stringcare_version}"
     //Room
+    //noinspection GradleDependency
     implementation "androidx.room:room-runtime:2.4.2"
+    //noinspection GradleDependency
     annotationProcessor "androidx.room:room-compiler:2.4.2"
     implementation 'com.github.ertugrulkaragoz:SuperForwardView:0.2'
     //BoxedVerticalSeekBar

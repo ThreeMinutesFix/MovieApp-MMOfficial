@@ -633,6 +633,7 @@ public class Home extends Fragment {
                             String banner = rootObject.get("banner").getAsString();
                             String poster = rootObject.get("poster").getAsString();
                             String logo = rootObject.get("logo_image").getAsString();
+
                             int status = rootObject.get("status").getAsInt();
 
                             if (status == 1) {

@@ -17,4 +17,5 @@
     <string name="playing_now">Playing Now...</string>
     <string name="save_close"><![CDATA[Save & Close]]></string>
     <string name="search">Search</string>
+    <string name="profiles_more"><![CDATA[Profiles & More]]></string>
 </resources>
