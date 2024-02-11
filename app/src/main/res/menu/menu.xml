@@ -4,19 +4,23 @@
     <item
         android:id="@+id/Home"
         android:icon="@drawable/round_home_24"
+        android:iconTint="@color/white"
         android:title="@string/home" />
 
     <item
         android:id="@+id/Search"
         android:icon="@drawable/baseline_search_24"
+        android:iconTint="@color/white"
         android:title="@string/search" />
     <item
         android:id="@+id/upcomings"
         android:icon="@drawable/hots"
+        android:iconTint="@color/white"
         android:title="@string/new_hot" />
     <item
         android:id="@+id/upcoming"
-        android:icon="@drawable/baseline_new_releases_24"
+        android:iconTint="@color/white"
+        android:icon="@drawable/baseline_account_circle_24"
         android:title="@string/my_marvel" />
 
 

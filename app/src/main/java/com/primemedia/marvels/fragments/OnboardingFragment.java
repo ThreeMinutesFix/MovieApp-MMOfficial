@@ -12,11 +12,6 @@ import android.view.ViewGroup;
 
 import com.primemedia.marvels.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link OnboardingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class OnboardingFragment extends Fragment {
 
     private static final String ARG_PAGE_NUMBER = "page_number";

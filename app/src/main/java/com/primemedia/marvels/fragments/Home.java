@@ -70,15 +70,15 @@ import java.util.Map;
 
 
 public class Home extends Fragment {
-    View tabcustom;
+    View tab_custom;
     public RecyclerView categories;
-    LinearLayout closebtn;
+    LinearLayout close_btn;
     String imageSliderType;
     LinearLayout interested_layout;
     View moviesShimmerLayout;
     RecyclerView continue_release_recyclerview;
     List<ImageSliderItem> imageSliderItems;
-    SwipeRefreshLayout home_swoper;
+    SwipeRefreshLayout home_swipper;
     View view;
     ViewPager2 HomeViewpager;
     NestedScrollView nestedScrollView;
@@ -113,12 +113,12 @@ public class Home extends Fragment {
         moviesShimmerLayout = view.findViewById(R.id.Movies_Shimmer_Layout);
         continue_release_recyclerview = view.findViewById(R.id.continue_release_recyclerview);
         resume_Layout = view.findViewById(R.id.resume_Layout);
-        tabcustom = view.findViewById(R.id.tabcustom);
-        movies = tabcustom.findViewById(R.id.movies);
-        warner = tabcustom.findViewById(R.id.warner);
+        tab_custom = view.findViewById(R.id.tabcustom);
+        movies = tab_custom.findViewById(R.id.movies);
+        warner = tab_custom.findViewById(R.id.warner);
 
-        paramount = tabcustom.findViewById(R.id.paramount);
-        more_items = tabcustom.findViewById(R.id.more_items);
+        paramount = tab_custom.findViewById(R.id.paramount);
+        more_items = tab_custom.findViewById(R.id.more_items);
         try {
             JSONObject userObject = UserManager.loadUser(mContext);
             userID = userObject.getInt("ID");
@@ -134,7 +134,7 @@ public class Home extends Fragment {
             shuffleContents = configObject.getInt("shuffle_contents");
         } catch (Exception e) {
         }
-        home_swoper = view.findViewById(R.id.home_swoper);
+        home_swipper = view.findViewById(R.id.home_swoper);
         loadSliderHome();
         imageSliderItems = new ArrayList<>();
         HomeViewpager.setClipToPadding(false);
@@ -179,7 +179,7 @@ public class Home extends Fragment {
         sceince_release_recyclerview = view.findViewById(R.id.sceince_release_recyclerview);
         LoadMoviesContent();
 
-        home_swoper.setOnRefreshListener(() -> {
+        home_swipper.setOnRefreshListener(() -> {
             LoadMoviesContent();
             loadSliderHome();
             loadResumeLayout();
@@ -215,8 +215,8 @@ public class Home extends Fragment {
         {
             LoadGenre();
         });
-        closebtn = genre_initlizer.findViewById(R.id.closebtn);
-        closebtn.setOnClickListener(v ->
+        close_btn = genre_initlizer.findViewById(R.id.closebtn);
+        close_btn.setOnClickListener(v ->
         {
             ObjectAnimator fadeOut = ObjectAnimator.ofFloat(genre_initlizer, "alpha", 1f, 0f);
             fadeOut.setDuration(500); // Adjust the duration as needed
@@ -334,7 +334,7 @@ public class Home extends Fragment {
                 MovieListAdepter myAdapter = new MovieListAdepter(mContext, recentlyAddedMovieList);
                 recenly_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 recenly_release_recyclerview.setAdapter(myAdapter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
 
             } else {
 
@@ -378,7 +378,7 @@ public class Home extends Fragment {
                 SearchListAdepter myadepter = new SearchListAdepter(mContext, searchList);
                 superherorecyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 superherorecyclerview.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
             }
 
         }, error -> {
@@ -419,7 +419,7 @@ public class Home extends Fragment {
                 SearchListAdepter myadepter = new SearchListAdepter(mContext, searchList);
                 sceince_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 sceince_release_recyclerview.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
             }
 
         }, error -> {
@@ -460,7 +460,7 @@ public class Home extends Fragment {
                 SearchListAdepter myadepter = new SearchListAdepter(mContext, searchList);
                 drama_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 drama_release_recyclerview.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
             }
 
         }, error -> {
@@ -501,7 +501,7 @@ public class Home extends Fragment {
                 SearchListAdepter myadepter = new SearchListAdepter(mContext, searchList);
                 DC_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 DC_release_recyclerview.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
             }
 
         }, error -> {
@@ -534,7 +534,7 @@ public class Home extends Fragment {
                 TrendingListAdepter myadepter = new TrendingListAdepter(mContext, limitedList);
                 top_trending_release_recyclerview.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 top_trending_release_recyclerview.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
 
             } else {
 
@@ -585,7 +585,7 @@ public class Home extends Fragment {
                 moviesOnlyForYouListAdepter myadepter = new moviesOnlyForYouListAdepter(mContext, movieList);
                 home_bywm_list_Recycler_View.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.HORIZONTAL, false));
                 home_bywm_list_Recycler_View.setAdapter(myadepter);
-                home_swoper.setRefreshing(false);
+                home_swipper.setRefreshing(false);
             } else {
                 interested_layout.setVisibility(View.GONE);
             }
@@ -660,7 +660,7 @@ public class Home extends Fragment {
 
             };
             queue.add(sr);
-            home_swoper.setRefreshing(false);
+            home_swipper.setRefreshing(false);
         } else {
             HomeViewpager.setVisibility(View.GONE);
         }
@@ -782,6 +782,6 @@ public class Home extends Fragment {
     }
 
     public View tabcustom() {
-        return tabcustom;
+        return tab_custom;
     }
 }

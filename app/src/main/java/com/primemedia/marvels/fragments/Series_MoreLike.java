@@ -12,8 +12,6 @@ import com.primemedia.marvels.R;
 
 public class Series_MoreLike extends Fragment {
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

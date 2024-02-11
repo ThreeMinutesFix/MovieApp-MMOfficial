@@ -45,7 +45,6 @@
             android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:elevation="10dp"
-
             app:backgroundColor="#000000"
             app:badgeColor="#FFC107"
             app:indicatorEnabled="false"
