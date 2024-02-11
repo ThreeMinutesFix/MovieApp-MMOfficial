@@ -21,8 +21,8 @@ import com.primemedia.marvels.list.TrendingList;
 import java.util.List;
 
 public class TrendingListAdepter extends RecyclerView.Adapter<TrendingListAdepter.MyViewHolder> {
-    private Context mContext;
-    private List<TrendingList> mData;
+    private final Context mContext;
+    private final List<TrendingList> mData;
 
     public TrendingListAdepter(Context mContext, List<TrendingList> mData) {
         this.mContext = mContext;

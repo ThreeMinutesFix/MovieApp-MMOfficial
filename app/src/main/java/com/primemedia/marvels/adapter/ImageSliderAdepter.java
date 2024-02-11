@@ -40,8 +40,8 @@ import java.util.List;
 
 public class ImageSliderAdepter extends RecyclerView.Adapter<ImageSliderAdepter.SliderViewHolder> {
 
-    private List<ImageSliderItem> slider_items;
-    private ViewPager2 viewPager2;
+    private final List<ImageSliderItem> slider_items;
+    private final ViewPager2 viewPager2;
     boolean isfav = false;
     boolean favoriteadded;
     Context context;

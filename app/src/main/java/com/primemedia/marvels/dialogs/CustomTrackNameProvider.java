@@ -9,12 +9,13 @@ import androidx.media3.common.util.UnstableApi;
 import androidx.media3.ui.DefaultTrackNameProvider;
 import androidx.media3.ui.TrackNameProvider;
 
-@UnstableApi public class CustomTrackNameProvider implements TrackNameProvider
-{
+@UnstableApi
+public class CustomTrackNameProvider implements TrackNameProvider {
     private Resources resources;
     private DefaultTrackNameProvider defaultTrackNameProvider;
 
-    @OptIn(markerClass = UnstableApi.class) public CustomTrackNameProvider(Resources resources) {
+    @OptIn(markerClass = UnstableApi.class)
+    public CustomTrackNameProvider(Resources resources) {
         this.resources = resources;
         this.defaultTrackNameProvider = new DefaultTrackNameProvider(resources);
 
@@ -35,11 +36,9 @@ import androidx.media3.ui.TrackNameProvider;
                 return "Data Saver";
             }
         }
-        return format.height +"p";
+        return format.height + "p";
 
     }
-
-
 
 
 }

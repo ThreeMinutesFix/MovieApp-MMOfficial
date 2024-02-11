@@ -27,8 +27,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class moviesOnlyForYouListAdepter extends RecyclerView.Adapter<moviesOnlyForYouListAdepter.MyViewHolder> {
-    private Context mContext;
-    private List<MovieList> mData;
+    private final Context mContext;
+    private final List<MovieList> mData;
 
     Context context;
 

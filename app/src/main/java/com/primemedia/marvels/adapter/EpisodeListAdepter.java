@@ -26,12 +26,12 @@ import java.util.List;
 
 public class EpisodeListAdepter extends RecyclerView.Adapter<EpisodeListAdepter.MyViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private View rootView;
     private String rootUrl;
-    private String apiKey;
-    private List<EpisodeList> mData;
-    private int contentID;
+    private  String apiKey;
+    private final List<EpisodeList> mData;
+    private final int contentID;
 
     Context context;
 

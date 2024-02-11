@@ -29,7 +29,7 @@ import java.util.List;
 
 public class FreshreleaseAdapter extends RecyclerView.Adapter<FreshreleaseAdapter.MyViewHolder> {
     private Context mContext;
-    private List<ComingSoonItem> mData;
+    private final List<ComingSoonItem> mData;
 
     public FreshreleaseAdapter(Context mContext, List<ComingSoonItem> mData) {
         this.mContext = mContext;

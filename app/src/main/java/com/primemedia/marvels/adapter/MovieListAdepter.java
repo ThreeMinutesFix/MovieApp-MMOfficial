@@ -35,7 +35,7 @@ import java.util.Locale;
 
 public class MovieListAdepter extends RecyclerView.Adapter<MovieListAdepter.MyViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private List<MovieList> mData;
 
     Context context;

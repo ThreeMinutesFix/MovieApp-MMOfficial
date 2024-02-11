@@ -52,14 +52,7 @@ public final class AudioTrackSelectionDialog extends BottomSheetDialogFragment {
 
     public interface TrackSelectionListener {
 
-        /**
-         * Called when tracks are selected.
-         *
-         * @param trackSelectionParameters A {@link TrackSelectionParameters} representing the selected
-         *                                 tracks. Any manual selections are defined by {@link
-         *                                 TrackSelectionParameters#disabledTrackTypes} and {@link
-         *                                 TrackSelectionParameters#overrides}.
-         */
+
         void onTracksSelected(TrackSelectionParameters trackSelectionParameters);
     }
 

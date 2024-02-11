@@ -41,21 +41,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Dialog to select tracks.
- */
+
 public final class TrackSelectionDialog extends BottomSheetDialogFragment {
     private BottomSheetBehavior mBottomBehavior;
+
     public interface TrackSelectionListener {
 
-        /**
-         * Called when tracks are selected.
-         *
-         * @param trackSelectionParameters A {@link TrackSelectionParameters} representing the selected
-         *                                 tracks. Any manual selections are defined by {@link
-         *                                 TrackSelectionParameters#disabledTrackTypes} and {@link
-         *                                 TrackSelectionParameters#overrides}.
-         */
+
         void onTracksSelected(TrackSelectionParameters trackSelectionParameters);
     }
 
@@ -69,19 +61,10 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
     private DialogInterface.OnClickListener onClickListener;
     private DialogInterface.OnDismissListener onDismissListener;
 
-    /**
-     * Returns whether a track selection dialog will have content to display if initialized with the
-     * specified {@link Player}.
-     */
     public static boolean willHaveContent(Player player) {
         return willHaveContent(player.getCurrentTracks());
     }
 
-
-    /**
-     * Returns whether a track selection dialog will have content to display if initialized with the
-     * specified {@link Tracks}.
-     */
     public static boolean willHaveContent(Tracks tracks) {
         for (Tracks.Group trackGroup : tracks.getGroups()) {
             if (SUPPORTED_TRACK_TYPES.contains(trackGroup.getType())) {
@@ -91,14 +74,7 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
         return false;
     }
 
-    /**
-     * Creates a dialog for a given {@link Player}, whose parameters will be automatically updated
-     * when tracks are selected.
-     *
-     * @param player            The {@link Player}.
-     * @param onDismissListener A {@link DialogInterface.OnDismissListener} to call when the dialog is
-     *                          dismissed.
-     */
+
     public static TrackSelectionDialog createForPlayer(
             Player player, DialogInterface.OnDismissListener onDismissListener) {
         return createForTracksAndParameters(
@@ -150,8 +126,9 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
         // Retain instance across activity re-creation to prevent losing access to init data.
         setRetainInstance(true);
     }
+
     @OptIn(markerClass = UnstableApi.class)
-    private void  init(
+    private void init(
             Tracks tracks,
             TrackSelectionParameters trackSelectionParameters,
             int titleId,
@@ -185,24 +162,14 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
         }
     }
 
-    /**
-     * Returns whether the disabled option is selected for the specified track type.
-     *
-     * @param trackType The track type.
-     * @return Whether the disabled option is selected for the track type.
-     */
+
     @OptIn(markerClass = UnstableApi.class)
     public boolean getIsDisabled(int trackType) {
         TrackSelectionViewFragment trackView = tabFragments.get(trackType);
         return trackView != null && trackView.isDisabled;
     }
 
-    /**
-     * Returns the selected track overrides for the specified track type.
-     *
-     * @param trackType The track type.
-     * @return The track overrides for the track type.
-     */
+
     @OptIn(markerClass = UnstableApi.class)
     public Map<TrackGroup, TrackSelectionOverride> getOverrides(int trackType) {
         TrackSelectionViewFragment trackView = tabFragments.get(trackType);
@@ -271,9 +238,8 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
         }
     }
 
-    @UnstableApi /**
-     * Fragment to show a track selection in tab of the track selection dialog.
-     */
+    @UnstableApi
+
     public static final class TrackSelectionViewFragment extends Fragment
             implements TrackSelectionView.TrackSelectionListener {
 
@@ -288,6 +254,7 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
             // Retain instance across activity re-creation to prevent losing access to init data.
             setRetainInstance(true);
         }
+
         @OptIn(markerClass = UnstableApi.class)
         public void init(
                 List<Tracks.Group> trackGroups,
@@ -305,6 +272,7 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
                     new HashMap<>(
                             TrackSelectionView.filterOverrides(overrides, trackGroups, allowMultipleOverrides));
         }
+
         @OptIn(markerClass = UnstableApi.class)
         @Override
         public View onCreateView(
@@ -319,10 +287,11 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
             trackSelectionView.setShowDisableOption(false);
             trackSelectionView.setAllowMultipleOverrides(allowMultipleOverrides);
             trackSelectionView.setAllowAdaptiveSelections(allowAdaptiveSelections);
-            TrackNameProvider trackNameProvider =  new CustomTrackNameProvider(getResources());
-     trackSelectionView.setTrackNameProvider(f -> f.height != Format.NO_VALUE ? (Math.round(f.frameRate) + f.height + " P") : trackNameProvider.getTrackName(f));
+            TrackNameProvider trackNameProvider = new CustomTrackNameProvider(getResources());
+            trackSelectionView.setTrackNameProvider(f -> f.height != Format.NO_VALUE ? (Math.round(f.frameRate) + f.height + " P") : trackNameProvider.getTrackName(f));
 
-            trackSelectionView.setTrackNameProvider(trackNameProvider);  trackSelectionView.init(
+            trackSelectionView.setTrackNameProvider(trackNameProvider);
+            trackSelectionView.init(
                     trackGroups,
                     isDisabled,
                     overrides,
@@ -344,6 +313,4 @@ public final class TrackSelectionDialog extends BottomSheetDialogFragment {
         super.onStart();
 
     }
-
-
 }
