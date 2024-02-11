@@ -1,5 +1,6 @@
 package com.primemedia.marvels;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -58,6 +59,8 @@ import com.primemedia.marvels.fragments.CollectionsSeries;
 import com.primemedia.marvels.fragments.SeriesEpsiodes;
 import com.primemedia.marvels.fragments.Series_MoreLike;
 import com.primemedia.marvels.fragments.Trailers_Series;
+import com.primemedia.marvels.list.EpisodeList;
+import com.primemedia.marvels.utility.GospelUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +76,7 @@ public class WebSeriesDetails extends AppCompatActivity {
     Context context = this;
     ImageView playerbuttons;
     int mainId;
+    boolean playPremium = false;
     ExoPlayer exoPlayer;
     PlayerView trailer_player;
    public static LinearLayout tab_content_loader;
@@ -81,7 +85,7 @@ public class WebSeriesDetails extends AppCompatActivity {
     private static final String KEY_PLAYBACK_POSITION = "playback_position";
     View more_cast_list, cast_addtional;
     String trailerUrl;
-
+    List<EpisodeList> episodeList;
     int contentId;
     String name;
     String releaseDate;
@@ -520,6 +524,17 @@ public class WebSeriesDetails extends AppCompatActivity {
         } else {
             if (exoPlayer != null) {
                 exoPlayer.setPlayWhenReady(false);
+            }
+        }
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1 && resultCode == RESULT_OK) {
+            // Pass the result to the Fragment
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.containers_series);
+            if(fragment != null) {
+                fragment.onActivityResult(requestCode, resultCode, data);
             }
         }
     }

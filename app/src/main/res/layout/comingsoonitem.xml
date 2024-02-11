@@ -219,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:maxLines="1"
-                android:text="Action, Kids, Indian"
+                android:text="Action, Kids, Indian,japan, china,koriam,india,karnataka"
                 android:textColor="@color/Non_Selected" />
         </LinearLayout>
     </LinearLayout>

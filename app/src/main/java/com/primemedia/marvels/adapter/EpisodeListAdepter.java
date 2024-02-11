@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -32,16 +33,17 @@ public class EpisodeListAdepter extends RecyclerView.Adapter<EpisodeListAdepter.
     private  String apiKey;
     private final List<EpisodeList> mData;
     private final int contentID;
-
+    private Fragment mParentFragment;
     Context context;
 
-    public EpisodeListAdepter(int contentID, Context mContext, View mView, String rootUrl, String apiKey, List<EpisodeList> mData) {
+    public EpisodeListAdepter(int contentID, Context mContext, View mView, String rootUrl, String apiKey, List<EpisodeList> mData,Fragment parentFragment) {
         this.contentID = contentID;
         this.mContext = mContext;
         this.rootView = mView;
         this.rootUrl = rootUrl;
         this.apiKey = apiKey;
         this.mData = mData;
+        this.mParentFragment = parentFragment;
     }
 
 
@@ -99,7 +101,7 @@ public class EpisodeListAdepter extends RecyclerView.Adapter<EpisodeListAdepter.
                             }
 
                             //mContext.startActivity(intent);
-                            ((WebSeriesDetails) mContext).startActivityForResult(intent, 1);
+                            mParentFragment.startActivityForResult(intent, 1);
                         }
                     }
 

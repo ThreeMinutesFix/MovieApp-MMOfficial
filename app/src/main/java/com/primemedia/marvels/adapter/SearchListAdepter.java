@@ -1,5 +1,6 @@
 package com.primemedia.marvels.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -51,7 +52,7 @@ public class SearchListAdepter extends RecyclerView.Adapter<SearchListAdepter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.setTitle(mData.get(position));
         holder.setYear(mData.get(position));
         holder.setImage(mData.get(position));

@@ -781,9 +781,10 @@ public class WebPlayer extends AppCompatActivity {
 
                     db.resumeContentDao().updateDuration(exoPlayer.getDuration(), resumeContentID);
 
-                } else if (playbackState == Player.STATE_ENDED) {
+                }
+
+                else if (playbackState == Player.STATE_ENDED) {
                     if (ContentType != null) {
-                        if (ContentType.equals("WebSeries")) {
                             if (Next_Ep_Avilable.equals("Yes")) {
                                 Play_Next_btn.setVisibility(View.VISIBLE);
                                 CountDownTimer mTimer = new CountDownTimer(5000, 100) {
@@ -808,7 +809,7 @@ public class WebPlayer extends AppCompatActivity {
                                 mTimer.start();
                             }
 
-                        }
+
                     }
 
                 } else {

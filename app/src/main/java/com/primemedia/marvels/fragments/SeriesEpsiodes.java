@@ -196,7 +196,7 @@ public class SeriesEpsiodes extends Fragment {
                 }
 
 
-                myadepter = new EpisodeListAdepter(id, mContext, rootView, Constants.url, Constants.apiKey, episodeList);
+                myadepter = new EpisodeListAdepter(id, mContext, rootView, Constants.url, Constants.apiKey, episodeList,this);
                 if (webSeriesEpisodeitemType == 1) {
                     episodeListRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 1, RecyclerView.VERTICAL, false));
                 } else {
@@ -233,7 +233,7 @@ public class SeriesEpsiodes extends Fragment {
                 int currentListPosition = data.getIntExtra("Current_List_Position", 0);
                 Log.d("listcurrent",""+currentListPosition);
                 int nextListPosition = currentListPosition+1;
-                EpisodeList myData = episodeList.get(nextListPosition);
+            EpisodeList myData = episodeList.get(nextListPosition);
 
                 if(myData.getType() == 0) {
 

@@ -15,8 +15,8 @@ import java.util.List;
 
 public class CastAdapterCustom extends RecyclerView.Adapter<CastAdapterCustom.ViewHolder> {
 
-    private Context context;
-    private List<String> castNames;
+    private final Context context;
+    private final List<String> castNames;
 
     public CastAdapterCustom(Context context, List<String> castNames) {
         this.context = context;
@@ -41,9 +41,8 @@ public class CastAdapterCustom extends RecyclerView.Adapter<CastAdapterCustom.Vi
         return castNames.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.names_types);
