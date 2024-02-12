@@ -1,4 +1,4 @@
-package com.primemedia.marvels.fragments;
+package com.primemedia.marvels.fragments.tabitems;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#0F1014"
     android:fitsSystemWindows="false"
-    tools:context=".fragments.Home">
+    tools:context=".fragments.tabitems.Home">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/home_swoper"

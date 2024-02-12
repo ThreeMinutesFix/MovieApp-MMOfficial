@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0E0F13"
-    tools:context="com.primemedia.marvels.fragments.Indians">
+    tools:context="com.primemedia.marvels.fragments.tabitems.Indians">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"

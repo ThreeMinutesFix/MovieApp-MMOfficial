@@ -1,4 +1,4 @@
-package com.primemedia.marvels.fragments;
+package com.primemedia.marvels.fragments.tabitems;
 
 import static com.primemedia.marvels.Dashboard.bottomBar;
 

@@ -1,4 +1,4 @@
-package com.primemedia.marvels.fragments;
+package com.primemedia.marvels.fragments.tabitems;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -48,6 +48,9 @@ import com.primemedia.marvels.adapter.MovieListAdepter;
 import com.primemedia.marvels.adapter.SearchListAdepter;
 import com.primemedia.marvels.adapter.TrendingListAdepter;
 import com.primemedia.marvels.adapter.moviesOnlyForYouListAdepter;
+import com.primemedia.marvels.fragments.Warner;
+import com.primemedia.marvels.fragments.tabitems.MarvelPage;
+import com.primemedia.marvels.fragments.tabitems.ParaVeresal;
 import com.primemedia.marvels.list.ContinuePlayingList;
 import com.primemedia.marvels.list.GenreList;
 import com.primemedia.marvels.list.ImageSliderItem;

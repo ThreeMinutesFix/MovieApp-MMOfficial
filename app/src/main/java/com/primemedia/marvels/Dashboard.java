@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.primemedia.marvels.fragments.Accounts;
-import com.primemedia.marvels.fragments.ComingSoon;
-import com.primemedia.marvels.fragments.Home;
+import com.primemedia.marvels.fragments.tabitems.ComingSoon;
+import com.primemedia.marvels.fragments.tabitems.Home;
 import com.primemedia.marvels.fragments.Search;
 
 import me.ibrahimsn.lib.NiceBottomBar;

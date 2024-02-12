@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.primemedia.marvels.R;
-import com.primemedia.marvels.fragments.Home;
+import com.primemedia.marvels.fragments.tabitems.Home;
 import com.primemedia.marvels.list.ContinuePlayingList;
 import com.primemedia.marvels.player.MoviePlayer;
 import com.primemedia.marvels.player.WebPlayer;

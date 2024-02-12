@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="fill_vertical"
     android:layout_marginTop="0dp"
-    tools:context=".fragments.MarvelPage"
+    tools:context=".fragments.tabitems.MarvelPage"
     android:background="@color/mWindowColorBg"
     android:fillViewport="true"
     android:paddingTop="0dp"
