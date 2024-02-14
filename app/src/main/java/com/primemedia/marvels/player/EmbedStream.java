@@ -32,7 +32,6 @@ public class EmbedStream extends AppCompatActivity {
     Context context = this;
     int notificationId = 1;
     MediaSessionCompat mediaSession;
-
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

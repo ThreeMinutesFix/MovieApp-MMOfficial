@@ -103,10 +103,12 @@ public class WebPlayer extends AppCompatActivity {
     private Button buttonSpeed, buttonServerType;
     String preferredLanguage = "en";
     ExoPlayer exoPlayer;
+    View episode_itemsNew;
     private final long currentPosition = 0;
     CardView animatedCardView;
     ImageView fullscreen;
     YouTubeOverlay youtube_overlay;
+    LinearLayout Episodes_layout;
     public static long current_pos_pip;
     Boolean contentLoaded = false;
 
@@ -268,6 +270,12 @@ public class WebPlayer extends AppCompatActivity {
             quality_layout.setVisibility(View.GONE);
             settings.setVisibility(View.GONE);
             webPlayer.setUseController(true);
+        });
+        episode_itemsNew = findViewById(R.id.episode_itemsNew);
+        Episodes_layout = findViewById(R.id.Episodes_layout);
+        Episodes_layout.setOnClickListener(v ->
+        {
+            episode_itemsNew.setVisibility(View.VISIBLE);
         });
         db = ResumeContentDatabase.getDbInstance(this.getApplicationContext());
         resumePosition = intent.getExtras().getLong("position");

@@ -16,7 +16,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import com.primemedia.marvels.Constants;
 import com.primemedia.marvels.R;
 import com.stringcare.library.SC;
@@ -59,6 +58,7 @@ public class GospelUtil {
         }
         return false;
     }
+
     public static String getCertificateType(int numericValue) {
         switch (numericValue) {
             case 0:
@@ -73,6 +73,7 @@ public class GospelUtil {
                 return "UR";
         }
     }
+
     public static boolean cr(Activity activity, boolean allowRoot) {
         if (!allowRoot) {
             for (String pathDir : System.getenv("PATH").split(":")) {
@@ -112,6 +113,7 @@ public class GospelUtil {
 
         return restrictPackageInfo;
     }
+
     public static Boolean isFirstOpen(Context context) {
         TinyDB tinyDB = new TinyDB(context);
         Boolean isFirstRun = tinyDB.getBoolean("isFirstRun");
@@ -122,15 +124,14 @@ public class GospelUtil {
             return false;
         }
     }
+
     public static void setWatchLog(Context context, String user_id, int content_id, int content_type, String apiKey) {
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sr = new StringRequest(Request.Method.POST, Constants.url + "addwatchlog", response -> {
-            try
-            {
+            try {
                 Integer.parseInt(response);
                 Log.d("test", "Watch Log Added!");
-            } catch (NumberFormatException ex)
-            {
+            } catch (NumberFormatException ex) {
                 Log.d("test", "Watch Log Not Added!");
             }
 
@@ -155,6 +156,7 @@ public class GospelUtil {
         };
         queue.add(sr);
     }
+
     public static void showWarningDialog(Activity context, String title, String message) {
         MaterialDialog mDialog = new MaterialDialog.Builder(context)
                 .setTitle(title)
@@ -164,7 +166,8 @@ public class GospelUtil {
 
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
-
+                        context.finish();
+                        context.finishAndRemoveTask();
                     }
                 })
                 .build();
@@ -172,6 +175,7 @@ public class GospelUtil {
         // Show dialog
         mDialog.show();
     }
+
     public ApplicationInfo getRestrictApp() {
         ApplicationInfo restrictPackageInfo = null;
         final PackageManager pm = activity.getPackageManager();

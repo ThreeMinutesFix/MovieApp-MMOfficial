@@ -157,7 +157,8 @@ public class Splash extends AppCompatActivity {
                         ApplicationInfo restrictedApp = helperUtils.getRestrictApp();
                         if (restrictedApp != null) {
                             Log.e("test", restrictedApp.loadLabel(Splash.this.getPackageManager()).toString());
-                            GospelUtil.showWarningDialog(Splash.this, "Restricted App!", "Please Uninstall " + restrictedApp.loadLabel(Splash.this.getPackageManager()).toString() + " to use this App On this Device!");
+                            GospelUtil.showWarningDialog(Splash.this, "Restricted App!", "Please Uninstall " +
+                                    restrictedApp.loadLabel(Splash.this.getPackageManager()).toString() + " to use this App On this Device!");
                         } else if (GospelUtil.cr(Splash.this, Constants.allowRoot)) {
                             GospelUtil.showWarningDialog(Splash.this, "ROOT!", "You are Not Allowed To Use this App on Rooted Device!");
                         } else if (Constants.allowVPN) {

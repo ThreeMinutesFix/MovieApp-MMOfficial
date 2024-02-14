@@ -14,10 +14,10 @@
         <com.github.vkay94.dtpv.DoubleTapPlayerView
             android:id="@+id/playerView"
             android:layout_width="match_parent"
-            app:resize_mode="fill"
             android:layout_height="match_parent"
             app:controller_layout_id="@layout/seriescontroller"
-            app:dtpv_controller="@id/ytOverlay" />
+            app:dtpv_controller="@id/ytOverlay"
+            app:resize_mode="fill" />
 
         <com.github.vkay94.dtpv.youtube.YouTubeOverlay
             android:id="@+id/ytOverlay"
@@ -82,9 +82,16 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <include
         android:id="@+id/settings"
         layout="@layout/settinglayout"
         android:visibility="gone" />
 
+    <include
+        android:id="@+id/episode_itemsNew"
+        layout="@layout/episode_items"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
