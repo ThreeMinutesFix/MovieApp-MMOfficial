@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.WindowManager;
@@ -92,6 +93,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import at.huber.youtubeExtractor.VideoMeta;
+import at.huber.youtubeExtractor.YouTubeExtractor;
+import at.huber.youtubeExtractor.YtFile;
 import io.github.anilbeesetti.nextlib.media3ext.ffdecoder.NextRenderersFactory;
 
 public class MoviePlayer extends AppCompatActivity {
@@ -328,8 +332,7 @@ public class MoviePlayer extends AppCompatActivity {
                     trackSelectionDialog.show(fragmentManager, "trackSelectionDialog");
                 }
             } else {
-                if (Quality_settings!=null)
-                {
+                if (Quality_settings != null) {
                     Quality_settings.setClickable(false);
                 }
 
@@ -418,7 +421,26 @@ public class MoviePlayer extends AppCompatActivity {
             initializePlayer(progressiveMediaSource);
 
         } else if (source.equals("Youtube")) {
+            new YouTubeExtractor(context) {
 
+                @Override
+                protected void onExtractionComplete(@androidx.annotation.Nullable SparseArray<YtFile> ytFiles, @androidx.annotation.Nullable VideoMeta videoMeta) {
+                    if (ytFiles != null && ytFiles.size() > 0) {
+                        for (int i = 0; i < ytFiles.size(); i++) {
+                            int itag = ytFiles.keyAt(i);
+                            YtFile ytFile = ytFiles.get(itag);
+
+                        }
+                        int selectedItag = findBestQualityItag(ytFiles);
+                        if (selectedItag != -1) {
+                            YtFile selectedFile = ytFiles.get(selectedItag);
+                            String downloadUrl = selectedFile.getUrl();
+Log.d("UtPlayer",downloadUrl);
+                            StartExoplayer(downloadUrl);
+                        }
+                    }
+                }
+            }.extract(cpUrl);
         } else if (source.equals("Dailymotion")) {
             makeJsonObjectRequest();
         } else if (source.equals("Tubi")) {
@@ -447,6 +469,36 @@ public class MoviePlayer extends AppCompatActivity {
 
             requestQueue.add(jsonObjectRequest);
         }
+    }
+
+    @OptIn(markerClass = UnstableApi.class)
+    private void StartExoplayer(String downloadUrl) {
+        DataSource.Factory dataSourceFactory = new DefaultHttpDataSource.Factory().setUserAgent(userAgent).setKeepPostFor302Redirects(true).setAllowCrossProtocolRedirects(true).setConnectTimeoutMs(DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS).setReadTimeoutMs(DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS).setDefaultRequestProperties(defaultRequestProperties);
+        MediaItem mediaItem = new MediaItem.Builder()
+                .setMimeType(MimeTypes.APPLICATION_MP4)
+                .setUri(downloadUrl)
+                .build();
+        MediaSource progressiveMediaSource = new ProgressiveMediaSource.Factory(dataSourceFactory)
+                .createMediaSource(mediaItem);
+        initializePlayer(progressiveMediaSource);
+    }
+
+    private int findBestQualityItag(SparseArray<YtFile> ytFiles) {
+        int bestQualityItag = -1;
+        int maxQuality = -1;
+
+        for (int i = 0; i < ytFiles.size(); i++) {
+            int itag = ytFiles.keyAt(i);
+            YtFile ytFile = ytFiles.get(itag);
+            if (ytFile.getFormat().getAudioBitrate() > 0) {
+                if (ytFile.getFormat().getHeight() > maxQuality) {
+                    maxQuality = ytFile.getFormat().getHeight();
+                    bestQualityItag = itag;
+                }
+            }
+        }
+
+        return bestQualityItag;
     }
 
     @OptIn(markerClass = UnstableApi.class)

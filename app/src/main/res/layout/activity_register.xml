@@ -4,6 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/back_draw"
     tools:context=".Register">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pure Flix"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="220dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            app:cardBackgroundColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:id="@+id/EmailText"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Email Id "
+                android:textColor="@color/white"
+                android:textColorHint="@color/Non_Selected"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/white"
+            android:gravity="center_vertical"
+            app:cardBackgroundColor="@color/black">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:inputType="textPassword"
+                android:layout_marginStart="5dp"
+                android:background="@android:color/transparent"
+                android:gravity="center_vertical"
+                android:hint="Password"
+                android:textColor="@color/white"
+                android:textColorHint="@color/Non_Selected"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/login"
+            android:backgroundTint="@color/black"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Sign In"
+            android:textStyle="bold"
+            app:rippleColor="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
