@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,9 +31,8 @@ import java.util.Objects;
 public class Register extends AppCompatActivity {
     TextInputEditText EmailText, password_text;
     MaterialButton login;
-    Context context;
+    Context context = this;
 
-    //https://www.youtube.com/watch?v=a-ywdyrfdIY
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,13 +40,21 @@ public class Register extends AppCompatActivity {
         EmailText = findViewById(R.id.EmailText);
         password_text = findViewById(R.id.password_text);
         login = findViewById(R.id.login);
-        String email = Objects.requireNonNull(EmailText.getText()).toString().trim();
-        String pass = Objects.requireNonNull(password_text.getText()).toString();
-        String originalInput = "login:" + email + ":" + getMd5(pass);
-        String encoded = Utils.toBase64(originalInput);
+
+
         login.setOnClickListener(v ->
         {
-            Login(encoded);
+            String email = Objects.requireNonNull(EmailText.getText()).toString().trim();
+            String pass = Objects.requireNonNull(password_text.getText()).toString();
+            String originalInput = "login:" + email + ":" + getMd5(pass);
+            String encoded = Utils.toBase64(originalInput);
+
+            if (!email.isEmpty() && !pass.isEmpty()) {
+                Toast.makeText(context, email + pass, Toast.LENGTH_SHORT).show();
+                Login(encoded);
+            } else {
+                Toast.makeText(context, "We dont accept empty id", Toast.LENGTH_SHORT).show();
+            }
         });
 
     }
@@ -53,17 +62,22 @@ public class Register extends AppCompatActivity {
     private void Login(String encoded) {
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sr = new StringRequest(Request.Method.POST, Constants.url + "authentication", response -> {
+            Log.d("AuthStatus",response);
             JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
-            String status = jsonObject.get("Status").toString();
-            status = status.substring(1, status.length() - 1);
+            if (jsonObject.has("Status")) {
+                String status = jsonObject.get("Status").toString();
+                status = status.substring(1, status.length() - 1);
 
-            if (response.equals("invalid")) {
-
-            } else if (status.equals("Successful")) {
-                saveData(response);
-                Intent intent = new Intent(Register.this, Splash.class);
-                startActivity(intent);
-                finish();
+                if (response.equals("invalid")) {
+                    Toast.makeText(context, "Wrong pass", Toast.LENGTH_SHORT).show();
+                } else if (status.equals("Successful")) {
+                    saveData(response);
+                    Intent intent = new Intent(Register.this, Splash.class);
+                    startActivity(intent);
+                    finish();
+                }
+            } else {
+                Toast.makeText(context, "this one is sus.", Toast.LENGTH_SHORT).show();
             }
 
 

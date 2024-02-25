@@ -36,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#3E3C3C"
             android:gravity="center_vertical"
             app:cardBackgroundColor="@color/black">
 
@@ -59,7 +59,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:layout_margin="10dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#3E3C3C"
             android:gravity="center_vertical"
             app:cardBackgroundColor="@color/black">
 
@@ -87,6 +87,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="Sign In"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:rippleColor="@color/white"
             app:strokeColor="@color/white"

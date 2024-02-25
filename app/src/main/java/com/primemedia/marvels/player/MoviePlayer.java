@@ -38,6 +38,8 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.common.Player;
+import androidx.media3.common.TrackSelectionParameters;
+import androidx.media3.common.Tracks;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
 import androidx.media3.datasource.DataSource;
@@ -54,6 +56,7 @@ import androidx.media3.exoplayer.trackselection.AdaptiveTrackSelection;
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection;
 import androidx.media3.exoplayer.trackselection.MappingTrackSelector;
+import androidx.media3.ui.TrackSelectionView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -204,6 +207,7 @@ public class MoviePlayer extends AppCompatActivity {
         Skip_Intro_btn = findViewById(R.id.Skip_Intro_btn);
         handler1.post(runnable);
         textContainer = findViewById(R.id.textContainer);
+
         youtube_overlay.performListener(new YouTubeOverlay.PerformListener() {
             @Override
             public void onAnimationStart() {
@@ -588,6 +592,12 @@ Log.d("UtPlayer",downloadUrl);
                 }
             }
 
+            @Override
+            public void onTracksChanged(Tracks tracks) {
+                Player.Listener.super.onTracksChanged(tracks);
+
+
+            }
         });
         AtomicInteger subContentID = new AtomicInteger();
         if (resumePosition != 0 && simpleExoPlayer != null) {
@@ -966,6 +976,16 @@ Log.d("UtPlayer",downloadUrl);
 
     private void adjustAudioDelay(ExoPlayer exoPlayer, long delayMillis) {
         exoPlayer.setPlaybackParameters(new PlaybackParameters(delayMillis, 1.0f));
+    }
+
+    @OptIn(markerClass = UnstableApi.class)
+    private int findRendererIndexForType(MappingTrackSelector.MappedTrackInfo mappedTrackInfo, int trackType) {
+        for (int i = 0; i < mappedTrackInfo.getRendererCount(); i++) {
+            if (mappedTrackInfo.getRendererType(i) == trackType) {
+                return i;
+            }
+        }
+        return -1; // If the renderer is not found, return -1
     }
 
 

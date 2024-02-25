@@ -88,10 +88,4 @@
         layout="@layout/settinglayout"
         android:visibility="gone" />
 
-    <include
-        android:id="@+id/episode_itemsNew"
-        layout="@layout/episode_items"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

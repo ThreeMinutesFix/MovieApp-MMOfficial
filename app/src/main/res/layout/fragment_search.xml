@@ -44,6 +44,7 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:id="@+id/searchTextview"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -78,14 +79,17 @@
         android:fillViewport="true">
 
         <LinearLayout
+            android:id="@+id/gnere_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:layout_margin="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/common_layout"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
@@ -109,7 +113,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:visibility="gone">
+               >
 
                 <LinearLayout
                     android:id="@+id/Top_Results"

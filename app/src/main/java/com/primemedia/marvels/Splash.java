@@ -751,22 +751,26 @@ public class Splash extends AppCompatActivity {
         JsonObject jsonObject = new Gson().fromJson(userData, JsonObject.class);
         String email = jsonObject.get("Email").getAsString();
         String password = jsonObject.get("Password").getAsString();
+
         String originalInput = "login:" + email + ":" + password;
-        SharedPreferences sharedPreferences = getSharedPreferences("SharedPreferences", MODE_PRIVATE);
-        String authToken = AccountManager.get(context).getPassword(new Account(originalInput, "accountType"));
         String encoded = Utils.toBase64(originalInput);
+
         RequestQueue queue = Volley.newRequestQueue(context);
         StringRequest sr = new StringRequest(Request.Method.POST, Constants.url + "authentication", response -> {
             if (!response.equals("")) {
                 JsonObject jsonObject1 = new Gson().fromJson(response, JsonObject.class);
                 String status = jsonObject1.get("Status").toString();
                 status = status.substring(1, status.length() - 1);
+
                 if (status.equals("Successful")) {
                     saveData(response);
+
                     JsonObject subObj = new Gson().fromJson(response, JsonObject.class);
                     int subscriptionType = subObj.get("subscription_type").getAsInt();
                     saveUserSubscriptionDetails(subscriptionType);
+
                     setOneSignalExternalID(String.valueOf(subObj.get("ID").getAsInt()));
+
                     saveNotification();
                     Intent intent = new Intent(Splash.this, Dashboard.class);
                     intent.putExtra("Notification_Data", notificationData);
@@ -814,7 +818,6 @@ public class Splash extends AppCompatActivity {
                 return params;
             }
 
-            @SuppressLint("HardwareIds")
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
