@@ -38,7 +38,6 @@ import androidx.media3.common.MediaItem;
 import androidx.media3.common.MimeTypes;
 import androidx.media3.common.PlaybackParameters;
 import androidx.media3.common.Player;
-import androidx.media3.common.TrackSelectionParameters;
 import androidx.media3.common.Tracks;
 import androidx.media3.common.util.UnstableApi;
 import androidx.media3.common.util.Util;
@@ -56,7 +55,6 @@ import androidx.media3.exoplayer.trackselection.AdaptiveTrackSelection;
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector;
 import androidx.media3.exoplayer.trackselection.ExoTrackSelection;
 import androidx.media3.exoplayer.trackselection.MappingTrackSelector;
-import androidx.media3.ui.TrackSelectionView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -439,7 +437,7 @@ public class MoviePlayer extends AppCompatActivity {
                         if (selectedItag != -1) {
                             YtFile selectedFile = ytFiles.get(selectedItag);
                             String downloadUrl = selectedFile.getUrl();
-Log.d("UtPlayer",downloadUrl);
+                            Log.d("UtPlayer", downloadUrl);
                             StartExoplayer(downloadUrl);
                         }
                     }
@@ -546,7 +544,11 @@ Log.d("UtPlayer",downloadUrl);
     private void initializePlayer(MediaSource mediaSource) {
         ExoTrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory();
         trackSelector = new DefaultTrackSelector(MoviePlayer.this, videoTrackSelectionFactory);
-        trackSelector.setParameters(trackSelector.buildUponParameters().setPreferredTextLanguage(preferredLanguage));
+        trackSelector.setParameters(trackSelector.buildUponParameters()
+                .setPreferredAudioLanguage("ta")
+                .setPreferredTextLanguage("en")
+                .setPreferredTextLanguage(preferredLanguage));
+
         NextRenderersFactory renderersFactory = new NextRenderersFactory(this);
         renderersFactory.setExtensionRendererMode(NextRenderersFactory.EXTENSION_RENDERER_MODE_ON);
         simpleExoPlayer = new ExoPlayer.Builder(this, renderersFactory)
