@@ -12,7 +12,7 @@ stringcare {
     srcFolders = ['src/main']
 }
 android {
-    namespace 'com.primemedia.marvels'
+    namespace 'com.primemedia.studioflix'
     compileSdk 34
 
     buildFeatures {

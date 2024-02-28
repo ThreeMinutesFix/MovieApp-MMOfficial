@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:152974754132:android:2da536205995886359c8c1",
+        "mobilesdk_app_id": "1:152974754132:android:86039b6fbe53b77459c8c1",
         "android_client_info": {
-          "package_name": "com.primemedia.marvels"
+          "package_name": "com.primmedia.studioflix"
         }
       },
       "oauth_client": [],
