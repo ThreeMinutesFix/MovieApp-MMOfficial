@@ -1,5 +1,5 @@
 
-rootProject.name = "PrimeMarvels"
+rootProject.name = "StudioFlix"
 include ':app'
 include ':youtubeExtractor'
 include ':doubletapplayerview'
