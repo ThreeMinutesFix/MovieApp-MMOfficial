@@ -19,7 +19,7 @@ android {
         buildConfig true
     }
     defaultConfig {
-        applicationId "com.primemedia.marvels"
+        applicationId "com.primemedia.studioflix"
         minSdk 30
         targetSdk 34
         versionCode 1
